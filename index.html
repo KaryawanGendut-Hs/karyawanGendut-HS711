@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Black Dragon's Lair 🐉</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CSS SECTION --- */
+        :root {
+            --bg-dark: #080808; /* Hitam hampir pekat */
+            --bg-card: #141414; /* Abu-abu naga gelap */
+            --accent-fire: #d90429; /* Merah darah menyala */
+            --accent-gold: #ffb703; /* Emas tua */
+            --text-main: #e0e0e0; /* Putih keabuan */
+            --text-dim: #8d99ae; /* Abu-abu redup */
+            --border-dragon: rgba(217, 4, 41, 0.2); /* Merah transparan untuk border */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            /* Background Tekstur Sisik/Batu Obsidian */
+            background-image: 
+                radial-gradient(var(--border-dragon) 1px, transparent 1px),
+                radial-gradient(var(--border-dragon) 1px, var(--bg-dark) 1px);
+            background-size: 20px 20px;
+            font-family: 'Quicksand', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Asap di Background */
+        .smoke {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0);
+            background-image: radial-gradient(circle, rgba(255,0,0,0.05) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+            animation: breathe 8s infinite alternate;
+        }
+
+        @keyframes breathe {
+            from { opacity: 0.3; }
+            to { opacity: 0.8; }
+        }
+
+        /* Kontainer Utama (Card) */
+        .dragon-card {
+            position: relative;
+            z-index: 10;
+            background-color: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 2px solid #222;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px var(--border-dragon);
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Judul Naga */
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            color: var(--text-main);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 50%, var(--accent-fire) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(217, 4, 41, 0.3);
+        }
+
+        .subtitle {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 14px;
+            color: var(--text-dim);
+            margin-bottom: 35px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        /* Stack Tombol */
+        .dragon-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Tombol Black Dragon (Sisik Obsidian) */
+        .btn-dragon {
+            all: unset;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover Effect: Menyala Merah Darah */
+        .btn-dragon:hover {
+            background-color: #222;
+            border-color: var(--accent-fire);
+            box-shadow: 0 0 25px rgba(217, 4, 41, 0.5), inset 0 0 5px rgba(217, 4, 41, 0.3);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+
+        /* Efek Kilatan Api saat di-hover */
+        .btn-dragon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(217, 4, 41, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-dragon:hover::after {
+            left: 100%;
+        }
+
+        /* Active: Sedikit Tertekan */
+        .btn-dragon:active {
+            transform: translateY(1px);
+            transition: 0.1s;
+        }
+
+        /* Warna spesifik untuk Ikon saat hover */
+        .btn-dragon:hover i:first-child {
+            color: var(--accent-fire);
+            transform: scale(1.1);
+        }
+
+        /* Ikon Depan */
+        .btn-dragon i:first-child {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            transition: all 0.3s ease;
+        }
+
+        /* Panah Kecil (Chevron) */
+        .chevron {
+            font-size: 0.8rem;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dragon:hover .chevron {
+            opacity: 1;
+            transform: translateX(5px);
+            color: var(--accent-gold);
+        }
+
+        /* Animasi Masuk */
+        .btn-dragon {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="smoke"></div>
+
+    <div class="dragon-card">
+        <h1>SHORTCUT KERJA 🐉</h1>
+        <span class="subtitle">Dominion over the Digital Realms</span>
+
+        <div class="dragon-buttons">
+            <button class="btn-dragon" data-url="https://supirgendut.w3spaces.com/laporan.html" style="animation-delay: 0.1s">
+                <i class="fas fa-eye-slash"></i> LAPORAN KERJA
+                <i class="fas fa-chevron-right chevron"></i>
+            </button>
+            
+            <button class="btn-dragon" data-url="https://supirgendut.w3spaces.com/GeneratorBonus.html" style="animation-delay: 0.2s">
+                <i class="fa-brands fa-500px"></i> GENERATOR BONUS LAST 5
+                <i class="fas fa-chevron-right chevron"></i>
+            </button>
+            
+            <button class="btn-dragon" data-url="https://supirgendut.w3spaces.com/scatter.html" style="animation-delay: 0.3s">
+                <i class="fa-solid fa-dragon"></i> Dragon mahjong
+                <i class="fas fa-chevron-right chevron"></i>
+            </button>
+            
+            <button class="btn-dragon" data-url="https://supirgendut.w3spaces.com/CariSaldo-Dana.html" style="animation-delay: 0.4s">
+                <i class="fa-solid fa-circle-dollar-to-slot"></i> Cari saldo akhir Dana
+                <i class="fas fa-chevron-right chevron"></i>
+            </button>
+            
+            <button class="btn-dragon" data-url="https://linkedin.com" style="animation-delay: 0.5s">
+                <i class="fab fa-linkedin"></i> Professional Dominion
+                <i class="fas fa-chevron-right chevron"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        /* --- JAVASCRIPT SECTION --- */
+        document.querySelectorAll('.btn-dragon').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const url = this.getAttribute('data-url');
+                
+                // Efek visual 'tekanan' saat diklik
+                this.style.transform = "scale(0.97)";
+                
+                // Tambahkan jejak suara 'raungan' singkat (opsional tapi keren)
+                // const roar = new Audio('https://www.soundjay.com/buttons/sounds/button-15.mp3');
+                // roar.volume = 0.5;
+                // roar.play();
+
+                setTimeout(() => {
+                    this.style.transform = "";
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
