@@ -1,0 +1,229 @@
+<html lang="id">
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGO4D - Carbon Minimalist Recap</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@700&family=Rajdhani:wght@600;700&display=swap');
+
+        :root {
+            --carbon-dark: #0f1012;
+            --carbon-light: #1a1c1f;
+            --accent-cyan: #22d3ee;
+            --accent-gold: #facc15;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            /* Background Carbon Fiber Minimalis */
+            background-color: var(--carbon-dark);
+            background-image: 
+                linear-gradient(30deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+                linear-gradient(150deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+                linear-gradient(30deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+                linear-gradient(150deg, #111 12%, transparent 12.5%, transparent 87%, #111 87.5%, #111),
+                linear-gradient(60deg, #151515 25%, transparent 25.5%, transparent 75%, #151515 75%, #151515),
+                linear-gradient(60deg, #151515 25%, transparent 25.5%, transparent 75%, #151515 75%, #151515);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 50px 20px;
+            color: #fff;
+        }
+
+        /* TOMBOL MINIMALIS */
+        .gen-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 14px 40px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .gen-btn:hover {
+            background: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3);
+        }
+
+        /* CONTAINER REKAP */
+        .hd-container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--carbon-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header-hd {
+            background: #fff;
+            color: #000;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .table-wrapper { padding: 15px; }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+
+        /* SIDEBAR MINIMALIS */
+        .sidebar-brand {
+            background: #222;
+            color: #555;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            width: 50px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            letter-spacing: 5px;
+            border-radius: 4px 0 0 4px;
+        }
+
+        /* DATA ROW */
+        .row-data td {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 18px 12px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Player Cell */
+        .row-data td:nth-child(2) {
+            color: var(--accent-cyan);
+            font-weight: bold;
+            border-left: 1px solid var(--border);
+        }
+
+        /* Bonus Cell (Gold Accent) */
+        .col-gray-hd { 
+            background: rgba(250, 204, 21, 0.05) !important;
+            color: var(--accent-gold) !important; 
+            font-weight: 900 !important;
+            border-right: 1px solid var(--border);
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Mini Label */
+        .label-cell {
+            display: block;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: var(--border);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="gen-btn" onclick="renderDynamicData()">
+        Refresh Live Feed
+    </button>
+
+    <div id="rekapBox" class="hd-container">
+        <div class="header-hd">REKAPITULASI SITUS BIGO4D</div>
+        <div class="table-wrapper">
+            <table>
+                <tbody id="hdContent">
+                    </tbody>
+            </table>
+            <div class="footer-line"></div>
+        </div>
+    </div>
+
+    <script>
+        function formatDigit(n) {
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function generateUser() {
+            const list = ['VIX', 'LUX', 'JOK', 'AGS', 'MGO', 'BRE', 'NEX', 'PAX'];
+            return list[Math.floor(Math.random() * list.length)] + "***" + Math.floor(Math.random()*99);
+        }
+
+        function getBonus(win, bet) {
+            const x = win / bet;
+            if (x >= 2000) return Math.floor(win * 0.10);
+            if (x >= 1000) return Math.floor(win * 0.30);
+            if (x >= 500) return Math.floor(win * 0.20);
+            if (x >= 300) return Math.floor(win * 0.10);
+            return 0;
+        }
+
+        function renderDynamicData() {
+            const target = document.getElementById('hdContent');
+            const box = document.getElementById('rekapBox');
+            const betOptions = [1000, 1200, 1600, 1800, 2000, 5000, 10000];
+            
+            target.innerHTML = "";
+
+            for (let i = 0; i < 5; i++) {
+                const bet = betOptions[Math.floor(Math.random() * betOptions.length)];
+                const mult = Math.floor(Math.random() * (2000 - 305 + 1)) + 305;
+                const win = bet * mult;
+                const gift = getBonus(win, bet);
+
+                let row = document.createElement('tr');
+                row.className = "row-data";
+                
+                let side = (i === 0) ? `<td rowspan="5" class="sidebar-brand">BIGO4D</td>` : "";
+
+                row.innerHTML = `
+                    ${side}
+                    <td><span class="label-cell">User ID</span>${generateUser()}</td>
+                    <td><span class="label-cell">Total Win</span>${formatDigit(win)}</td>
+                    <td><span class="label-cell">Bet</span>${formatDigit(bet)}</td>
+                    <td class="col-gray-hd"><span class="label-cell">Gift Bonus</span>${formatDigit(gift)}</td>
+                `;
+                target.appendChild(row);
+            }
+
+            box.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
